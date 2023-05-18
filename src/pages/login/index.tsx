@@ -7,7 +7,7 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
-import { type } from "os";
+//import { type } from "os";
 import React from "react";
 
 type LoginType = {
