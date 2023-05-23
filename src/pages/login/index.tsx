@@ -7,14 +7,17 @@ import {
   Typography,
   TextField,
 } from "@mui/material";
-//import { type } from "os";
 import React from "react";
+import { useNotification } from "../../context/notification.context";
+import { LoginValidate } from "../../utils/validateForm";
+
 
 type LoginType = {
   username: string;
   password: string;
 };
 export const LoginPage: React.FC<{}> = () => {
+  const { getError, getSuccess } = useNotification();
   const [loginData, setLoginData] = React.useState<LoginType>({
     username: "",
     password: "",
@@ -22,12 +25,18 @@ export const LoginPage: React.FC<{}> = () => {
 
   const dataLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
-  }
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(loginData);
-  }
+    LoginValidate.validate(loginData)
+      .then(() => {
+        getSuccess(JSON.stringify(loginData));
+      })
+      .catch((error) => {
+        getError(error.message);
+      });
+  };
 
   return (
     <Container maxWidth="sm">
@@ -45,23 +54,21 @@ export const LoginPage: React.FC<{}> = () => {
             </Typography>
             <Box component="form" onSubmit={handleSubmit}>
               <TextField
-              name="username"
+                name="username"
                 margin="normal"
                 type="text"
                 fullWidth
                 label="Email"
                 sx={{ mt: 2, mb: 1.5 }}
-                required
                 onChange={dataLogin}
               />
               <TextField
-              name="password"
+                name="password"
                 margin="normal"
                 type="password"
                 fullWidth
                 label="Password"
                 sx={{ mt: 1.5, mb: 1.5 }}
-                required
                 onChange={dataLogin}
               />
 
