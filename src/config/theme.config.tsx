@@ -7,7 +7,7 @@ type ThemeProp = {
 
 export enum themePalette {
     BG = "#12181b",
-    LIME = "#c8fa5f",
+    LIME = "#896bab",
     FONT_GLOBAL = " 'JetBrains Mono', monospace",
     //Alert styles
     ERROR_MAIN= "#f44336",
