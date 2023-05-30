@@ -1,23 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
-interface CartState {
-    id: string | number;
-    name: string;
-    image: string;
-    info: string;
+interface CartAddState {
+  id: string | number;
+  name: string;
+  image: string;
+  info: string;
 }
 
-const initialState: CartState[] = []
+interface CartRemoveState {
+  id: string | number;
+}
+
+const initialState: CartAddState[] = [];
 
 export const cartSlice = createSlice({
-  name: "cart",
+  name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<CartState>) => {},
-    removeToCart: (state, action: PayloadAction<CartState>) => {},
+    addToCart: (state, action: PayloadAction<CartAddState>) => {
+      const {id} = action.payload
+      if (
+        state.length === 0 ||
+        state.filter((item) => item.id === id).length === 0
+      ) {
+        state.push(action.payload);
+      }
+    },
+    removeToCart: (state, action: PayloadAction<CartRemoveState>) => {},
   },
 });
 
-// eslint-disable-next-line no-empty-pattern
-export const {} = cartSlice.actions;
+export const { addToCart, removeToCart } = cartSlice.actions;
