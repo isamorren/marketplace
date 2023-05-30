@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   Card,
@@ -7,8 +7,8 @@ import {
   Typography,
   CardActions,
   Divider,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 type CardProps = {
   image: string;
@@ -38,8 +38,16 @@ export const CardComponent: React.FC<CardProps> = ({
         <Typography sx={{ mt: 1.5 }}>Estado: {status}</Typography>
       </CardContent>
       <CardActions>
-        <Button fullWidth variant="contained" size="small" onClick={() => navigate(`/character/${id}`)}>
+        <Button
+          fullWidth
+          variant="contained"
+          size="small"
+          onClick={() => navigate(`/character/${id}`)}
+        >
           Learn More
+        </Button>
+        <Button fullWidth variant="outlined" size="small" disabled>
+          Add to cart
         </Button>
       </CardActions>
     </Card>
