@@ -2,15 +2,16 @@ import React from 'react';
 import {
   Button,
   Card,
+  CardActions,
   CardContent,
   CardMedia,
   Typography,
-  CardActions,
   Divider,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import { addToCart } from '../../redux/slices/cart.slice';
+import { setItem } from '../../utils/localStorage';
 
 type CardProps = {
   image: string;
@@ -35,6 +36,7 @@ export const CardComponent: React.FC<CardProps> = ({
 
   React.useEffect(() => {
     setDisabledBtn(itemExist.some((item) => item.id === id));
+    setItem('cart', itemExist);
   }, [itemExist, id]);
 
   const handleAddToCart = () => {
